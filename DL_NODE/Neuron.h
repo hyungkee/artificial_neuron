@@ -6,23 +6,27 @@ class Neuron {
 public:
 
 	// constructor
-	Neuron() : errors(0), inNum(0), actFunc(NULL), z(0) {};
-	Neuron(double(*_actFunc)(double z)) :errors(0), inNum(0), actFunc(_actFunc), z(0) { }
+	Neuron() : level(1), errors(0), actFunc(NULL), z(0) {};
+	Neuron(int _level) : level(_level), errors(0), actFunc(NULL), z(0) {};
+	Neuron(double(*_actFunc)(double z)) :level(0), errors(0), actFunc(_actFunc), z(0) { }
+	Neuron(int _level, double(*_actFunc)(double z)) :level(_level), errors(0), actFunc(_actFunc), z(0) { }
 
 	// getter
 	virtual double getZ() = 0; // pure virtual func
 	virtual double getA() = 0; // pure virtual func
-	double getError() { return errors; }
-	int getInNum() { return inNum; }
+	double getError()	{	return errors;}
+	int getInNum()		{	return inNeuronPtrs.size();}
+	int getOutNum()		{	return outNeuronPtrs.size();}
+	int getLevel()		{	return level;}
 
 	// setter
 	void setActFunc(double(*_actFunc)(double z)) { actFunc = _actFunc; }
 
 	// methods
 	virtual void updateZ() = 0; // pure virtual func
-	Neuron& addNeuron(Neuron* neuron_ptr) {
-		inNum++;
-		neuron_ptrs.push_back(neuron_ptr);
+	Neuron& connectNeuron(Neuron* targetNeuronPtr) {
+		inNeuronPtrs.push_back(targetNeuronPtr);
+		targetNeuronPtr->outNeuronPtrs.push_back(this);
 		return (*this);
 	}
 
@@ -31,10 +35,11 @@ public:
 	}
 
 protected:
-	int inNum;
+	int level;
 	double z;
 	double errors;
 	double (*actFunc)(double z);
 	std::vector<double>	weights;
-	std::vector<Neuron*> neuron_ptrs;
+	std::vector<Neuron*> inNeuronPtrs;
+	std::vector<Neuron*> outNeuronPtrs;
 };
