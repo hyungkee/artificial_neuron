@@ -121,6 +121,7 @@
     <ClCompile Include="BiasNeuron.cpp" />
     <ClCompile Include="FreeNeuron.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NeuronManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BiasNeuron.h" />
@@ -128,6 +129,9 @@
     <ClInclude Include="MLActivation.h" />
     <ClInclude Include="Neuron.h" />
     <ClInclude Include="NeuronManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

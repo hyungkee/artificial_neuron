@@ -23,7 +23,7 @@ void FreeNeuron::updateZ() {
 	for (int i = 0; i < getOutNum(); i++) {
 		Neuron* neuronPtr = *o_n_iter;
 //		neuronPtr->updateZ(); // TODO : it should be changed to inserting to priority Queue.(In Process based simulation..)
-		NeuronManager::getNeuronManager().updateNeuron(neuronPtr);
+//		NeuronManager::getNeuronManager().updateNeuron(neuronPtr);
 	}
 }
 
